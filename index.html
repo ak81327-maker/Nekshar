@@ -5,115 +5,104 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nekshar Agarbatti</title>
 
-<style>
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f8f5ef;
-color:#333;
-}
-header{
-background:#8B0000;
-color:white;
-padding:20px;
-text-align:center;
-}
-nav{
-background:#b22222;
-padding:10px;
-text-align:center;
-}
-nav a{
-color:white;
-text-decoration:none;
-margin:15px;
-font-weight:bold;
-}
-.hero{
-padding:50px 20px;
-text-align:center;
-background:#fff8dc;
-}
-.hero h1{
-font-size:38px;
-color:#8B0000;
-}
-.hero p{
-font-size:18px;
-}
-.btn{
-display:inline-block;
-background:#8B0000;
-color:white;
-padding:12px 25px;
-text-decoration:none;
-border-radius:5px;
-margin-top:20px;
-}
-.section{
-padding:40px 20px;
-text-align:center;
-}
-.product{
-background:white;
-padding:20px;
-margin:15px;
-border-radius:10px;
-box-shadow:0 0 10px #ccc;
-display:inline-block;
-width:250px;
-}
-footer{
-background:#222;
-color:white;
-padding:20px;
-text-align:center;
-}
-</style>
-</head>
+<link rel="stylesheet" href="style.css">
 
+</head>
 <body>
 
 <header>
-<h1>🌸 Nekshar Agarbatti 🌸</h1>
-<p>Premium Quality Incense Sticks</p>
+    <div class="logo">
+        <img src="images/logo.png" alt="Nekshar Logo">
+        <h1>NEKSHAR AGARBATTI</h1>
+        <p>Premium Fragrance • Made in India</p>
+    </div>
 </header>
 
 <nav>
-<a href="#">Home</a>
-<a href="#">Products</a>
-<a href="#">About</a>
-<a href="#">Contact</a>
+    <a href="#home">Home</a>
+    <a href="#products">Products</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
 </nav>
 
-<div class="hero">
-<h1>Welcome to Nekshar Agarbatti</h1>
-<p>Natural Fragrance | Premium Quality | Made in India</p>
-<a class="btn" href="#">View Products</a>
-</div>
+<section class="hero" id="home">
+    <h2>Welcome to Nekshar Agarbatti</h2>
+    <p>Experience Divine Fragrance Every Day</p>
+    <a href="#products" class="btn">View Products</a>
+</section>
 
-<div class="section">
-<h2>Our Products</h2>
+<section id="products">
+<h2 class="title">Our Products</h2>
 
-<div class="product">
+<div class="products">
+
+<div class="card">
+<img src="images/rose.jpg">
 <h3>Rose Agarbatti</h3>
-<p>Premium Rose Fragrance</p>
+<p>Price : ₹15</p>
 </div>
 
-<div class="product">
-<h3>Sandal Agarbatti</h3>
-<p>Long Lasting Sandal Aroma</p>
-</div>
-
-<div class="product">
+<div class="card">
+<img src="images/mogra.jpg">
 <h3>Mogra Agarbatti</h3>
-<p>Refreshing Floral Fragrance</p>
+<p>Price : ₹15</p>
+</div>
+
+<div class="card">
+<img src="images/chandan.jpg">
+<h3>Chandan Agarbatti</h3>
+<p>Price : ₹15</p>
+</div>
+
+<div class="card">
+<img src="images/rose-cone.jpg">
+<h3>Rose Dhoop Cone</h3>
+<p>Price : ₹15</p>
+</div>
+
+<div class="card">
+<img src="images/mogra-cone.jpg">
+<h3>Mogra Dhoop Cone</h3>
+<p>Price : ₹15</p>
+</div>
+
+<div class="card">
+<img src="images/chandan-cone.jpg">
+<h3>Chandan Dhoop Cone</h3>
+<p>Price : ₹15</p>
 </div>
 
 </div>
+</section>
 
-<div class="section">
-<h2>Contact Us</h2>
-<p>Email: info@nekshar.com</p>
-<p>Phone: +91-8287548936</p>
-</div>
+<section id="about">
+<h2 class="title">About Us</h2>
+
+<p class="about">
+Nekshar Agarbatti brings premium quality incense sticks and dhoop cones with long lasting fragrance.
+Our mission is to spread purity, peace and devotion in every home across India.
+</p>
+
+</section>
+
+<section id="contact">
+<h2 class="title">Contact Us</h2>
+
+<p>📞 Mobile : 8287548936</p>
+<p>🇮🇳 Delivery Available Across India</p>
+
+<a class="whatsapp"
+href="https://wa.me/918287548936">
+Order on WhatsApp
+</a>
+
+</section>
+
+<footer>
+© 2026 Nekshar Agarbatti | All Rights Reserved
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
