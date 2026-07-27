@@ -1,370 +1,351 @@
+
 <!DOCTYPE html>
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>निक्शार - भक्ति की पहचान | Agarbatti & Dhoop Cone</title>
+    <title>WorkSpace - All-in-one Collaborative Workspace</title>
+    <!-- Modern Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
+        /* CSS Reset & Variables */
+        :root {
+            --primary: #FF5A5F;
+            --primary-hover: #E0484C;
+            --bg-color: #FAFAFA;
+            --card-bg: #FFFFFF;
+            --text-main: #111827;
+            --text-muted: #6B7280;
+            --border-color: #E5E7EB;
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
-
-        :root {
-            --primary-gold: #c59b27;
-            --dark-gold: #997315;
-            --cream-bg: #faf7f2;
-            --card-bg: #ffffff;
-            --text-dark: #2c2c2c;
-            --shadow: 0 8px 24px rgba(0,0,0,0.08);
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background-color: var(--cream-bg);
-            color: var(--text-dark);
+            background-color: var(--bg-color);
+            color: var(--text-main);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Header */
+        /* Safe & Modern Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navbar */
         header {
-            background: #ffffff;
-            padding: 1.2rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
+            background: rgba(250, 250, 250, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
             z-index: 1000;
         }
 
-        .logo {
-            text-align: center;
-        }
-
-        .logo h1 {
-            color: var(--dark-gold);
-            font-size: 2rem;
-            letter-spacing: 2px;
-            font-weight: 700;
-        }
-
-        .logo p {
-            font-size: 0.85rem;
-            color: #555;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        nav a {
-            margin-left: 25px;
-            text-decoration: none;
-            color: #444;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--primary-gold);
-        }
-
-        /* Hero Banner */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1602928321679-560bb453f190?q=80&w=1200') center/cover;
-            height: 50vh;
+        nav {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            text-align: center;
-            color: #fff;
-            padding: 0 20px;
+            height: 72px;
         }
 
-        .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+        .logo {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-badge {
+            background: var(--primary);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-ghost {
+            color: var(--text-main);
+            background: transparent;
+        }
+
+        .btn-ghost:hover {
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 2px 8px rgba(255, 90, 95, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+
+        .pill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #FFEAEA;
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            max-width: 900px;
+            margin: 0 auto 24px;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: #f0e6d2;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto 36px;
         }
 
-        .btn {
-            background-color: var(--primary-gold);
-            color: #fff;
-            padding: 12px 32px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1rem;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: 600;
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Product Preview Block */
+        .preview-container {
+            margin-top: 60px;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-subtle);
+            padding: 16px;
+            overflow: hidden;
+        }
+
+        .preview-header {
+            display: flex;
+            gap: 8px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 16px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #E5E7EB;
+        }
+
+        .preview-body {
+            height: 400px;
+            background: #F9FAFB;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Features Grid */
+        .features {
+            padding: 80px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 32px;
+            border-radius: var(--radius-lg);
             transition: all 0.3s ease;
         }
 
-        .btn:hover {
-            background-color: var(--dark-gold);
-            transform: translateY(-2px);
+        .feature-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
         }
 
-        /* Products Section */
-        .products-section {
-            padding: 50px 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2rem;
-            color: var(--dark-gold);
-        }
-
-        .filter-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 8px 24px;
-            border: 2px solid var(--primary-gold);
-            background: transparent;
-            color: var(--dark-gold);
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--primary-gold);
-            color: #fff;
-        }
-
-        /* Grid */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
-        }
-
-        .product-card {
-            background: var(--card-bg);
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: #FFF1F2;
+            color: var(--primary);
             border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
-            text-align: center;
-            padding-bottom: 20px;
-            border: 1px solid #f0e8d8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
         }
 
-        .product-card:hover {
-            transform: translateY(-6px);
-        }
-
-        .product-img {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-            background-color: #f9f9f9;
-        }
-
-        .product-card h3 {
-            margin: 15px 0 5px;
-            font-size: 1.4rem;
-            color: #222;
-        }
-
-        .product-type {
-            font-size: 0.9rem;
-            color: #777;
-            font-weight: 500;
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
             margin-bottom: 10px;
         }
 
-        .badge {
-            display: inline-block;
-            background-color: #f3ebd7;
-            color: var(--dark-gold);
-            padding: 4px 14px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
         }
 
-        /* Features */
-        .features {
-            background: #fff;
-            padding: 40px 5%;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
-            text-align: center;
-            border-top: 1px solid #eee;
-        }
-
-        .feature-box h4 {
-            color: var(--dark-gold);
-            margin-bottom: 5px;
-            font-size: 1.1rem;
-        }
-
-        /* Footer */
-        footer {
-            background: #1f1f1f;
-            color: #ccc;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-        }
-
-        footer span {
-            color: var(--primary-gold);
-            font-weight: 600;
-        }
-
+        /* Responsive Breakpoints */
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 12px;
-            }
-            .hero h2 {
-                font-size: 1.8rem;
-            }
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .hero-cta { flex-direction: column; width: 100%; }
+            .btn { width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Header / Navbar -->
     <header>
-        <div class="logo">
-            <h1>॥ निक्शार ॥</h1>
-            <p>भक्ति की पहचान</p>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    WorkSpace <span class="logo-badge">PRO</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#solutions">Solutions</a></li>
+                    <li><a href="#templates">Templates</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="#" class="btn btn-ghost">Sign In</a>
+                    <a href="#" class="btn btn-primary">Get Started Free</a>
+                </div>
+            </nav>
         </div>
-        <nav>
-            <a href="#products">उत्पाद</a>
-            <a href="#about">हमारे बारे में</a>
-            <a href="#contact">संपर्क</a>
-        </nav>
     </header>
 
-    <!-- Hero -->
-    <section class="hero">
-        <h2>शुद्धता और दिव्य सुगंध</h2>
-        <p>Long Lasting & Pure - अगरबत्ती एवं धूप कोन</p>
-        <a href="#products" class="btn">उत्पाद देखें</a>
-    </section>
-
-    <!-- Products -->
-    <section class="products-section" id="products">
-        <h2 class="section-title">हमारे मुख्य उत्पाद</h2>
-
-        <div class="filter-buttons">
-            <button class="filter-btn active" onclick="filterProducts('all')">सभी उत्पाद</button>
-            <button class="filter-btn" onclick="filterProducts('agarbatti')">अगरबत्ती</button>
-            <button class="filter-btn" onclick="filterProducts('dhoop')">धूप कोन</button>
-        </div>
-
-        <div class="product-grid">
+    <!-- Main Hero Section -->
+    <main class="container">
+        <section class="hero">
+            <div class="pill-tag">✨ New: AI-Powered Workflows Included</div>
+            <h1>Docs that bring teams, data, and tools together.</h1>
+            <p>Combine documents, spreadsheets, and applications into one seamless workspace designed for modern teams.</p>
             
-            <!-- Mogra Dhoop Cone -->
-            <div class="product-card dhoop">
-                <img src="1000022709.jpg" alt="मोगरा धूप कोन" class="product-img">
-                <h3>मोगरा (Mogra)</h3>
-                <p class="product-type">धूप कोन (Dhoop Cone)</p>
-                <span class="badge">Long Lasting & Pure</span>
+            <div class="hero-cta">
+                <a href="#" class="btn btn-primary" style="padding: 14px 28px; font-size: 1rem;">Start for Free</a>
+                <a href="#" class="btn btn-ghost" style="padding: 14px 28px; font-size: 1rem;">Request Demo →</a>
             </div>
 
-            <!-- Chandan Dhoop Cone -->
-            <div class="product-card dhoop">
-                <img src="1000022707.jpg" alt="चंदन धूप कोन" class="product-img">
-                <h3>चंदन (Chandan)</h3>
-                <p class="product-type">धूप कोन (Dhoop Cone)</p>
-                <span class="badge">Long Lasting & Pure</span>
+            <!-- Product Mockup Preview -->
+            <div class="preview-container">
+                <div class="preview-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="preview-body">
+                    [ Interactive Workspace Dashboard Preview ]
+                </div>
             </div>
-            
-<!-- Rose Agarbatti -->
-<div class="product-card agarbatti">
-    <img src="100002276.jpg" alt="गुलाब अगरबत्ती" class="product-img">
-    <h3>गुलाब (Rose)</h3>
-    <p class="product-type">अगरबत्ती (Agarbatti)</p>
-    <span class="badge">Long Lasting & Pure</span>
-</div>
+        </section>
 
-            <!-- Mogra Agarbatti -->
-            <div class="product-card agarbatti">
-                <img src="1000022705.jpg" alt="मोगरा अगरबत्ती" class="product-img">
-                <h3>मोगरा (Mogra)</h3>
-                <p class="product-type">अगरबत्ती (Agarbatti)</p>
-                <span class="badge">Long Lasting & Pure</span>
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <div class="grid-3">
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3>Connected Docs</h3>
+                    <p>Write freely like a document, but power it with dynamic building blocks, tables, and live formulas.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Automation & Packs</h3>
+                    <p>Connect your doc directly to Figma, Jira, Slack, and Google Drive to automate repetitive tasks.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Built-in AI Assistant</h3>
+                    <p>Summarize notes, generate insights, and automate content creation effortlessly with integrated AI.</p>
+                </div>
             </div>
+        </section>
+    </main>
 
-            <!-- Chandan Agarbatti -->
-            <div class="product-card agarbatti">
-                <img src="1000022704.jpg" alt="चंदन अगरबत्ती" class="product-img">
-                <h3>चंदन (Chandan)</h3>
-                <p class="product-type">अगरबत्ती (Agarbatti)</p>
-                <span class="badge">Long Lasting & Pure</span>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Features -->
-    <section class="features" id="about">
-        <div class="feature-box">
-            <h4>🌿 100% शुद्ध एवं प्राकृतिक</h4>
-            <p>उत्कृष्ट गुणवत्ता वाली प्राकृतिक सामग्री</p>
-        </div>
-        <div class="feature-box">
-            <h4>⏳ दीर्घकालिक सुगंध</h4>
-            <p>Long Lasting Fragrance Formula</p>
-        </div>
-        <div class="feature-box">
-            <h4>🛕 भक्ति की पहचान</h4>
-            <p>पवित्र पूजा और ध्यान हेतु सर्वोत्तम</p>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <p>&copy; 2026 <span>निक्शार (Nekshar)</span>. सर्वाधिकार सुरक्षित। | भक्ति की पहचान</p>
-    </footer>
-
-    <!-- Filter Script -->
-    <script>
-        function filterProducts(category) {
-            const cards = document.querySelectorAll('.product-card');
-            const buttons = document.querySelectorAll('.filter-btn');
-
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            cards.forEach(card => {
-                if (category === 'all') {
-                    card.style.display = 'block';
-                } else {
-                    if (card.classList.contains(category)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                }
-            });
-        }
-    </script>
 </body>
 </html>
