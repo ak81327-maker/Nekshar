@@ -16,7 +16,8 @@ const products = [
     name: "Mogra Agarbatti",
     type: "AGARBATTI",
     price: 15,
-    symbol: "✿"
+    symbol: "image:"images/IMG20260719151640(1).jpg"
+}, "
   },
   {
     id: 3,
