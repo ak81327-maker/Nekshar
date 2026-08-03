@@ -1,27 +1,35 @@
-// ===============================
+// ===========================
 // NEKSHAR AGARBATTI
 // SCRIPT.JS
-// ===============================
+// ===========================
 
-// Cart
-let cart = [];
+// Cart data
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// Add Product
+// Add product to cart
 function addToCart(name, price) {
+
     cart.push({
         name: name,
         price: price
     });
 
-    alert(
-        name +
-        " has been added to your cart.\n\n" +
-        "Total Items: " +
-        cart.length
-    );
+    // Save cart
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert(name + " added to cart!");
+
+    // Open cart page
+    window.location.href = "cart.html";
 }
 
-// Page Loaded
+// Clear cart (optional)
+function clearCart() {
+    localStorage.removeItem("cart");
+    cart = [];
+}
+
+// Website loaded
 window.onload = function () {
-    console.log("Nekshar Agarbatti Website Loaded Successfully");
+    console.log("Nekshar Agarbatti Website Loaded");
 };
