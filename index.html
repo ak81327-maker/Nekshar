@@ -4,8 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="Nekshar Agarbatti - Premium Chandan, Mogra and Rose Agarbatti & Dhoop Cone at ₹15.">
-  <meta name="keywords" content="Nekshar Agarbatti, Chandan Agarbatti, Mogra Agarbatti, Rose Agarbatti, Dhoop Cone">
+  <meta name="description"
+    content="Nekshar Agarbatti - Premium Chandan, Mogra and Rose Agarbatti & Dhoop Cone.">
+
+  <meta name="keywords"
+    content="Nekshar Agarbatti, Chandan Agarbatti, Mogra Agarbatti, Rose Agarbatti, Dhoop Cone">
+
+  <meta name="theme-color" content="#17130f">
 
   <title>Nekshar Agarbatti | Premium Fragrance</title>
 
@@ -14,27 +19,35 @@
 
 <body>
 
-  <!-- HEADER -->
+  <!-- ================= HEADER ================= -->
+
   <header class="topbar">
 
-    <div class="brand">
+    <a href="#" class="brand">
       <span class="brand-mark">N</span>
 
-      <div>
+      <span class="brand-text">
         <b>NEKSHAR</b>
         <small>AGARBATTI</small>
-      </div>
-    </div>
+      </span>
+    </a>
 
-    <button class="cart-btn" onclick="openCart()">
+    <button
+      type="button"
+      class="cart-btn"
+      onclick="openCart()"
+      aria-label="Open shopping cart">
+
       🛒 Cart
       <span id="cartCount">0</span>
+
     </button>
 
   </header>
 
 
-  <!-- HERO SECTION -->
+  <!-- ================= HERO ================= -->
+
   <section class="hero">
 
     <div class="hero-content">
@@ -44,11 +57,12 @@
       </p>
 
       <h1>
-        Khushboo jo<br>
+        Khushboo jo
+        <br>
         <em>yaad rahe.</em>
       </h1>
 
-      <p>
+      <p class="hero-description">
         Chandan, Mogra aur Rose — premium agarbatti
         aur dhoop cone, har pooja aur har pal ke liye.
       </p>
@@ -59,44 +73,70 @@
 
     </div>
 
-    <div class="hero-art">
+
+    <div class="hero-art" aria-hidden="true">
+
       <div class="glow"></div>
-      <div class="incense">ॐ</div>
+
+      <div class="incense">
+        ॐ
+      </div>
+
     </div>
 
   </section>
 
 
-  <!-- TRUST SECTION -->
+  <!-- ================= TRUST ================= -->
+
   <section class="trust">
 
-    <div>
-      ✦
-      <b>Premium Fragrance</b>
-      <span>Long-lasting aroma</span>
+    <div class="trust-item">
+
+      <span class="trust-icon">✦</span>
+
+      <div>
+        <b>Premium Fragrance</b>
+        <span>Long-lasting aroma</span>
+      </div>
+
     </div>
 
-    <div>
-      ₹
-      <b>Only ₹15</b>
-      <span>Simple pricing</span>
+
+    <div class="trust-item">
+
+      <span class="trust-icon">₹</span>
+
+      <div>
+        <b>Only ₹15</b>
+        <span>Simple pricing</span>
+      </div>
+
     </div>
 
-    <div>
-      ✓
-      <b>Easy Checkout</b>
-      <span>Cart to payment</span>
+
+    <div class="trust-item">
+
+      <span class="trust-icon">✓</span>
+
+      <div>
+        <b>Easy Checkout</b>
+        <span>Cart to payment</span>
+      </div>
+
     </div>
 
   </section>
 
 
-  <!-- PRODUCTS -->
+  <!-- ================= PRODUCTS ================= -->
+
   <main id="products">
 
     <div class="section-head">
 
       <div>
+
         <p class="eyebrow">
           OUR COLLECTION
         </p>
@@ -104,25 +144,28 @@
         <h2>
           Choose your fragrance
         </h2>
+
       </div>
 
-      <p>
+      <p class="collection-info">
         6 premium choices • ₹15 each
       </p>
 
     </div>
 
 
-    <div class="products" id="productGrid">
+    <!-- Products script.js se load honge -->
 
-      <!-- Products JavaScript se automatically load honge -->
-
+    <div
+      class="products"
+      id="productGrid">
     </div>
 
   </main>
 
 
-  <!-- BRAND STORY -->
+  <!-- ================= BRAND STORY ================= -->
+
   <section class="story">
 
     <div>
@@ -132,7 +175,8 @@
       </p>
 
       <h2>
-        Har ghar mein<br>
+        Har ghar mein
+        <br>
         <em>khushboo ka ehsaas.</em>
       </h2>
 
@@ -147,21 +191,25 @@
   </section>
 
 
-  <!-- FOOTER -->
+  <!-- ================= FOOTER ================= -->
+
   <footer>
 
-    <div class="brand">
+    <a href="#" class="brand">
 
       <span class="brand-mark">
         N
       </span>
 
-      <div>
-        <b>NEKSHAR</b>
-        <small>AGARBATTI</small>
-      </div>
+      <span class="brand-text">
 
-    </div>
+        <b>NEKSHAR</b>
+
+        <small>AGARBATTI</small>
+
+      </span>
+
+    </a>
 
     <p>
       © 2026 Nekshar Agarbatti. All rights reserved.
@@ -170,31 +218,33 @@
   </footer>
 
 
-  <!-- CART DRAWER -->
+  <!-- ================= CART ================= -->
+
   <div
     class="overlay"
     id="overlay"
-    onclick="closeCart(event)"
-  >
+    onclick="closeCart(event)">
 
     <aside
       class="drawer"
-      onclick="event.stopPropagation()"
-    >
+      onclick="event.stopPropagation()">
 
       <button
+        type="button"
         class="close"
         onclick="closeCart()"
-      >
+        aria-label="Close cart">
+
         ×
+
       </button>
 
       <h2>
         Your Cart
       </h2>
 
-      <div id="cartItems">
-      </div>
+      <div id="cartItems"></div>
+
 
       <div class="cart-total">
 
@@ -208,11 +258,14 @@
 
       </div>
 
+
       <button
+        type="button"
         class="primary full"
-        onclick="goCheckout()"
-      >
+        onclick="goCheckout()">
+
         Proceed to Buy
+
       </button>
 
     </aside>
@@ -220,30 +273,33 @@
   </div>
 
 
-  <!-- CHECKOUT MODAL -->
+  <!-- ================= CHECKOUT ================= -->
+
   <div
     class="modal"
-    id="checkout"
-  >
+    id="checkout">
 
     <div class="checkout-card">
 
       <button
+        type="button"
         class="close"
         onclick="closeCheckout()"
-      >
+        aria-label="Close checkout">
+
         ×
+
       </button>
 
-      <div id="checkoutContent">
-      </div>
+      <div id="checkoutContent"></div>
 
     </div>
 
   </div>
 
 
-  <!-- JAVASCRIPT -->
+  <!-- ================= SCRIPT ================= -->
+
   <script src="script.js"></script>
 
 </body>
