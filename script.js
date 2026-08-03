@@ -7,13 +7,13 @@
 const products = [
 
   {
-    id: 1,
-    name: "Chandan Agarbatti",
-    type: "AGARBATTI",
-    price: 15,
-    symbol: "✦",
-    image: "image: "images/IMG20260719151640 (1).jpg"
-  },
+  id: 1,
+  name: "Chandan Agarbatti",
+  type: "AGARBATTI",
+  price: 15,
+  symbol: "✦",
+  image: "images/IMG20260719151640 (1).jpg"
+},
 
   {
     id: 2,
