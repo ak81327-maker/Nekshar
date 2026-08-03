@@ -12,7 +12,7 @@ const products = [
     type: "AGARBATTI",
     price: 15,
     symbol: "✦",
-    image: "images/chandan.jpg"
+    image: "image: "images/IMG20260719151640 (1).jpg"
   },
 
   {
