@@ -1,1 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Nekshar Agarbatti - Order</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8f5ef;
+      color: #222;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .box {
+      background: white;
+      padding: 22px;
+      border-radius: 15px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .order-summary {
+      background: #f7f7f7;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .item {
+      padding: 7px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .total {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 12px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 9px;
+      background: #25D366;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="box">
+
+    <h1>🛍️ Nekshar Agarbatti</h1>
+
+    <div class="subtitle">
+      Complete your order
+    </div>
+
+    <div class="order-summary">
+      <h3>Order Summary</h3>
+
+      <div id="orderItems">
+        Your cart is empty.
+      </div>
+
+      <div class="total">
+        Total: ₹<span id="totalAmount">0</span>
+      </div>
+    </div>
+
+    <form id="orderForm">
+
+      <label for="name">Name</label>
+      <input
+        type="text"
+        id="name"
+        placeholder="Enter your name"
+        required
+      >
+
+      <label for="phone">Mobile Number</label>
+      <input
+        type="tel"
+        id="phone"
+        placeholder="Enter mobile number"
+        maxlength="10"
+        required
+      >
+
+      <label for="address">Delivery Address</label>
+      <textarea
+        id="address"
+        placeholder="House No, Street, Area, City, State, PIN"
+        required
+      ></textarea>
+
+      <label for="payment">Payment Method</label>
+
+      <select id="payment">
+        <option value="Cash on Delivery">Cash on Delivery</option>
+        <option value="UPI">UPI</option>
+      </select>
+
+      <br><br>
+
+      <button type="submit">
+        📲 Place Order on WhatsApp
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+<script src="order.js"></script>
+
+</body>
+</html>
