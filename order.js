@@ -6,7 +6,7 @@
 // Country code 91 ke saath
 // Example: 919876543210
 
-const WHATSAPP_NUMBER = "91XXXXXXXXXX";
+const WHATSAPP_NUMBER = "918287548936";
 
 
 // ------------------------------------------
