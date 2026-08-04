@@ -2,73 +2,74 @@
 // NEKSHAR AGARBATTI - ORDER SYSTEM
 // ==========================================
 
-// ⚠️ YAHAN APNA WHATSAPP NUMBER DALEIN
-// Country code 91 ke saath
-// Example: 919876543210
-
 const WHATSAPP_NUMBER = "918287548936";
 
+document.addEventListener("DOMContentLoaded", function () {
 
-// ------------------------------------------
-// CART DATA
-// ------------------------------------------
+  // ------------------------------------------
+  // CART DATA
+  // ------------------------------------------
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-const orderItems = document.getElementById("orderItems");
-const totalAmount = document.getElementById("totalAmount");
+  const orderItems = document.getElementById("orderItems");
+  const totalAmount = document.getElementById("totalAmount");
+  const orderForm = document.getElementById("orderForm");
 
 
-// ------------------------------------------
-// SHOW CART
-// ------------------------------------------
+  // ------------------------------------------
+  // SHOW CART
+  // ------------------------------------------
 
-function showCart() {
+  function showCart() {
 
-  if (cart.length === 0) {
-    orderItems.innerHTML = "Your cart is empty.";
-    totalAmount.textContent = "0";
+    if (!orderItems || !totalAmount) return;
+
+    if (cart.length === 0) {
+      orderItems.innerHTML = "Your cart is empty.";
+      totalAmount.textContent = "0";
+      return;
+    }
+
+    let total = 0;
+
+    orderItems.innerHTML = "";
+
+    cart.forEach(item => {
+
+      const price = Number(item.price) || 0;
+      const quantity = Number(item.quantity) || 1;
+      const itemTotal = price * quantity;
+
+      total += itemTotal;
+
+      const div = document.createElement("div");
+
+      div.className = "item";
+
+      div.innerHTML = `
+        ${item.name || "Product"}
+        × ${quantity}
+        — ₹${itemTotal}
+      `;
+
+      orderItems.appendChild(div);
+    });
+
+    totalAmount.textContent = total;
+  }
+
+
+  // ------------------------------------------
+  // PLACE ORDER
+  // ------------------------------------------
+
+  if (!orderForm) {
+    console.error("orderForm nahi mila.");
     return;
   }
 
-  let total = 0;
-
-  orderItems.innerHTML = "";
-
-  cart.forEach(item => {
-
-    const price = Number(item.price) || 0;
-    const quantity = Number(item.quantity) || 1;
-
-    const itemTotal = price * quantity;
-
-    total += itemTotal;
-
-    const div = document.createElement("div");
-
-    div.className = "item";
-
-    div.innerHTML = `
-      ${item.name || "Product"}
-      × ${quantity}
-      — ₹${itemTotal}
-    `;
-
-    orderItems.appendChild(div);
-
-  });
-
-  totalAmount.textContent = total;
-}
-
-
-// ------------------------------------------
-// PLACE ORDER
-// ------------------------------------------
-
-document
-  .getElementById("orderForm")
-  .addEventListener("submit", function(event) {
+  orderForm.addEventListener("submit", function (event) {
 
     event.preventDefault();
 
@@ -86,37 +87,40 @@ document
     const address =
       document.getElementById("address").value.trim();
 
+    const paymentElement =
+      document.getElementById("payment");
+
     const payment =
-      document.getElementById("payment").value;
+      paymentElement ? paymentElement.value : "COD";
 
 
-    // Mobile validation
+    if (!name || !address) {
+      alert("Please fill all required details.");
+      return;
+    }
+
 
     if (!/^[0-9]{10}$/.test(phone)) {
-
       alert("Please enter a valid 10 digit mobile number.");
-
       return;
     }
 
 
     // --------------------------------------
-    // CREATE WHATSAPP MESSAGE
+    // CREATE ORDER MESSAGE
     // --------------------------------------
 
-    let message = "";
+    let message =
+      "🛍️ *NEKSHAR AGARBATTI - NEW ORDER*\n\n";
 
-    message += "🛍️ *NEKSHAR AGARBATTI - NEW ORDER*";
-    message += "\n\n";
+    message +=
+      "👤 *Customer:* " + name + "\n";
 
-    message += "👤 *Customer:* " + name;
-    message += "\n";
+    message +=
+      "📱 *Mobile:* " + phone + "\n\n";
 
-    message += "📱 *Mobile:* " + phone;
-    message += "\n\n";
-
-    message += "📦 *ORDER DETAILS*";
-    message += "\n";
+    message +=
+      "📦 *ORDER DETAILS*\n";
 
 
     let total = 0;
@@ -125,7 +129,6 @@ document
 
       const price = Number(item.price) || 0;
       const quantity = Number(item.quantity) || 1;
-
       const itemTotal = price * quantity;
 
       total += itemTotal;
@@ -140,25 +143,23 @@ document
     });
 
 
-    message += "\n\n";
+    message +=
+      "\n\n💰 *TOTAL: ₹" + total + "*\n";
 
-    message += "💰 *TOTAL: ₹" + total + "*";
-    message += "\n";
+    message +=
+      "💳 *Payment:* " + payment + "\n\n";
 
-    message += "💳 *Payment:* " + payment;
-    message += "\n\n";
+    message +=
+      "🏠 *DELIVERY ADDRESS*\n" +
+      address +
+      "\n\n";
 
-    message += "🏠 *DELIVERY ADDRESS*";
-    message += "\n";
-
-    message += address;
-
-    message += "\n\n";
-    message += "Thank you for ordering from Nekshar Agarbatti 🙏";
+    message +=
+      "Thank you for ordering from Nekshar Agarbatti 🙏";
 
 
     // --------------------------------------
-    // OPEN WHATSAPP
+    // WHATSAPP LINK
     // --------------------------------------
 
     const whatsappURL =
@@ -168,11 +169,18 @@ document
       encodeURIComponent(message);
 
 
-    window.open(whatsappURL, "_blank");
+    console.log("WhatsApp URL:", whatsappURL);
+
+    // Mobile par WhatsApp open karega
+    window.location.href = whatsappURL;
 
   });
 
 
-// Show cart when page opens
+  // ------------------------------------------
+  // SHOW CART
+  // ------------------------------------------
 
-showCart();
+  showCart();
+
+});
