@@ -6,16 +6,12 @@ const WHATSAPP_NUMBER = "918287548936";
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  // ------------------------------------------
   // CART DATA
-  // ------------------------------------------
-
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   const orderItems = document.getElementById("orderItems");
   const totalAmount = document.getElementById("totalAmount");
   const orderForm = document.getElementById("orderForm");
-
 
   // ------------------------------------------
   // SHOW CART
@@ -32,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     let total = 0;
-
     orderItems.innerHTML = "";
 
     cart.forEach(item => {
@@ -47,18 +42,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
       div.className = "item";
 
-      div.innerHTML = `
-        ${item.name || "Product"}
-        × ${quantity}
-        — ₹${itemTotal}
-      `;
+      div.textContent =
+        `${item.name || "Product"} × ${quantity} — ₹${itemTotal}`;
 
       orderItems.appendChild(div);
     });
 
     totalAmount.textContent = total;
   }
-
 
   // ------------------------------------------
   // PLACE ORDER
@@ -93,21 +84,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const payment =
       paymentElement ? paymentElement.value : "COD";
 
-
-    if (!name || !address) {
+    // CHECK DETAILS
+    if (!name || !phone || !address) {
       alert("Please fill all required details.");
       return;
     }
-
 
     if (!/^[0-9]{10}$/.test(phone)) {
       alert("Please enter a valid 10 digit mobile number.");
       return;
     }
 
-
     // --------------------------------------
-    // CREATE ORDER MESSAGE
+    // CREATE WHATSAPP MESSAGE
     // --------------------------------------
 
     let message =
@@ -121,7 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     message +=
       "📦 *ORDER DETAILS*\n";
-
 
     let total = 0;
 
@@ -142,7 +130,6 @@ document.addEventListener("DOMContentLoaded", function () {
         itemTotal;
     });
 
-
     message +=
       "\n\n💰 *TOTAL: ₹" + total + "*\n";
 
@@ -157,9 +144,8 @@ document.addEventListener("DOMContentLoaded", function () {
     message +=
       "Thank you for ordering from Nekshar Agarbatti 🙏";
 
-
     // --------------------------------------
-    // WHATSAPP LINK
+    // WHATSAPP
     // --------------------------------------
 
     const whatsappURL =
@@ -168,19 +154,14 @@ document.addEventListener("DOMContentLoaded", function () {
       "?text=" +
       encodeURIComponent(message);
 
-
     console.log("WhatsApp URL:", whatsappURL);
 
-    // Mobile par WhatsApp open karega
-    window.location.href = whatsappURL;
+    // WhatsApp open
+    window.open(whatsappURL, "_blank");
 
   });
 
-
-  // ------------------------------------------
   // SHOW CART
-  // ------------------------------------------
-
   showCart();
 
 });
