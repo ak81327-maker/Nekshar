@@ -1,51 +1,902 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Shopping Cart - Nekshar Agarbatti</title>
+  <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="style.css">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Cart | Nekshar Agarbatti</title>
+
+  <meta
+    name="description"
+    content="Nekshar Agarbatti shopping cart - Bhakti Ki Pahchan"
+  >
+
+  <meta
+    name="theme-color"
+    content="#5b2418"
+  >
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+  <style>
+
+    /* ================= CART PAGE ================= */
+
+    .cart-page {
+      min-height: 75vh;
+      padding: 70px 0 90px;
+      background: #fffaf4;
+    }
+
+    .cart-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .cart-title p {
+      color: #8a4b35;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+
+    .cart-title h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(38px, 6vw, 55px);
+      line-height: 1.1;
+    }
+
+    .cart-title span {
+      display: block;
+      width: 50px;
+      height: 2px;
+      background: #7b301e;
+      margin: 18px auto 0;
+    }
+
+
+    /* CART LAYOUT */
+
+    .cart-layout {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 30px;
+      align-items: start;
+    }
+
+
+    /* PRODUCTS */
+
+    .cart-products {
+      background: #ffffff;
+      border: 1px solid #eadbd0;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      gap: 20px;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid #eadbd0;
+    }
+
+    .cart-item:last-child {
+      border-bottom: 0;
+    }
+
+
+    .cart-item-image {
+      width: 90px;
+      height: 90px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #f2e4d7;
+    }
+
+    .cart-item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+
+    .cart-item-info h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    .cart-item-info p {
+      color: #8a4b35;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+
+    /* QUANTITY */
+
+    .quantity-box {
+      display: flex;
+      align-items: center;
+      border: 1px solid #d9c8bb;
+      border-radius: 7px;
+      overflow: hidden;
+      width: max-content;
+      margin-top: 10px;
+    }
+
+    .quantity-box button {
+      width: 32px;
+      height: 32px;
+      border: 0;
+      background: #f7eee7;
+      color: #5b2418;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .quantity-box span {
+      min-width: 34px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+
+    /* RIGHT SIDE */
+
+    .cart-summary {
+      background: #ffffff;
+      border: 1px solid #eadbd0;
+      border-radius: 15px;
+      padding: 25px;
+      position: sticky;
+      top: 100px;
+    }
+
+    .cart-summary h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 27px;
+      margin-bottom: 22px;
+    }
+
+
+    .summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 0;
+      border-bottom: 1px solid #eee1d7;
+      font-size: 14px;
+    }
+
+
+    .summary-total {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .summary-total span:last-child {
+      color: #7b301e;
+    }
+
+
+    .order-button {
+      display: block;
+      width: 100%;
+      text-align: center;
+      border: 0;
+      background: #5b2418;
+      color: #ffffff;
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    .order-button:hover {
+      background: #7b301e;
+      transform: translateY(-2px);
+    }
+
+
+    .continue-shopping {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: #5b2418;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+
+    /* REMOVE */
+
+    .remove-button {
+      border: 0;
+      background: transparent;
+      color: #a0442e;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 7px;
+    }
+
+    .remove-button:hover {
+      text-decoration: underline;
+    }
+
+
+    /* EMPTY */
+
+    .empty-cart {
+      text-align: center;
+      padding: 70px 20px;
+    }
+
+    .empty-cart-icon {
+      font-size: 50px;
+      margin-bottom: 15px;
+    }
+
+    .empty-cart h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .empty-cart p {
+      color: #765e54;
+      margin-bottom: 25px;
+    }
+
+    .empty-cart a {
+      display: inline-block;
+      background: #5b2418;
+      color: #ffffff;
+      padding: 13px 25px;
+      border-radius: 30px;
+      font-weight: 700;
+    }
+
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+
+      .cart-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .cart-summary {
+        position: static;
+      }
+
+    }
+
+
+    @media (max-width: 550px) {
+
+      .cart-page {
+        padding: 55px 0 70px;
+      }
+
+      .cart-item {
+        grid-template-columns: 70px 1fr;
+        gap: 13px;
+        padding: 15px;
+      }
+
+      .cart-item-image {
+        width: 70px;
+        height: 70px;
+      }
+
+      .cart-item-info h3 {
+        font-size: 17px;
+      }
+
+      .cart-item-action {
+        grid-column: 2;
+      }
+
+    }
+
+  </style>
+
 </head>
+
 
 <body>
 
-<header>
-    <h1>Nekshar Agarbatti</h1>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+  <div class="container nav">
+
+    <a
+      href="index.html"
+      class="logo"
+    >
+
+      <span class="logo-main">
+        NEKSHAR
+      </span>
+
+      <span class="logo-sub">
+        BHAKTI KI PAHCHAN
+      </span>
+
+    </a>
+
+
+    <nav class="menu">
+
+      <a href="index.html">
+        Home
+      </a>
+
+      <a href="index.html#shop">
+        Shop
+      </a>
+
+      <a href="index.html#about">
+        About
+      </a>
+
+      <a href="index.html#contact">
+        Contact
+      </a>
+
+    </nav>
+
+
+    <a
+      href="cart.html"
+      class="cart-button"
+    >
+      🛒 Cart
+      <span id="cartCount">
+        0
+      </span>
+    </a>
+
+  </div>
+
 </header>
 
-<section class="products-section">
 
-    <h2>Your Shopping Cart</h2>
+<!-- ================= CART ================= -->
 
-    <div id="cart-items">
-        <p>Your cart is empty.</p>
+<main class="cart-page">
+
+  <div class="container">
+
+
+    <div class="cart-title">
+
+      <p>
+        NEKSHAR
+      </p>
+
+      <h1>
+        Your Cart
+      </h1>
+
+      <span></span>
+
     </div>
 
-    <h3 id="total">
-        Total: ₹0
-    </h3>
 
-    <br>
+    <div
+      id="cartContent"
+      class="cart-layout"
+    >
 
-    <!-- GO TO ORDER PAGE -->
-    <button type="button" onclick="window.location.href='order.html'">
-        Proceed to Checkout
-    </button>
+      <!-- JAVASCRIPT WILL LOAD CART HERE -->
 
-    <br><br>
+    </div>
 
-    <!-- CONTINUE SHOPPING -->
-    <button type="button" onclick="window.location.href='index.html'">
-        Continue Shopping
-    </button>
+  </div>
 
-</section>
+</main>
 
-<script src="cart.js"></script>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+  <div class="container footer-content">
+
+    <div>
+
+      <div class="footer-logo">
+        NEKSHAR
+      </div>
+
+      <p>
+        Bhakti Ki Pahchan
+      </p>
+
+    </div>
+
+
+    <div class="footer-links">
+
+      <a href="index.html">
+        Home
+      </a>
+
+      <a href="index.html#shop">
+        Shop
+      </a>
+
+      <a href="index.html#about">
+        About
+      </a>
+
+      <a href="index.html#contact">
+        Contact
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="copyright">
+
+    © 2026 Nekshar Agarbatti.
+    All Rights Reserved.
+
+  </div>
+
+</footer>
+
+
+<!-- ================= CART JAVASCRIPT ================= -->
+
+<script>
+
+const CART_KEY = "neksharCart";
+
+
+/* GET CART */
+
+function getCart() {
+
+  try {
+
+    const cart =
+      JSON.parse(
+        localStorage.getItem(CART_KEY)
+      );
+
+    return Array.isArray(cart)
+      ? cart
+      : [];
+
+  } catch(error) {
+
+    return [];
+
+  }
+
+}
+
+
+/* SAVE CART */
+
+function saveCart(cart) {
+
+  localStorage.setItem(
+    CART_KEY,
+    JSON.stringify(cart)
+  );
+
+}
+
+
+/* UPDATE CART COUNT */
+
+function updateCartCount() {
+
+  const cart = getCart();
+
+  let count = 0;
+
+  cart.forEach(function(item) {
+
+    count += Number(item.quantity) || 1;
+
+  });
+
+
+  const element =
+    document.getElementById(
+      "cartCount"
+    );
+
+
+  if(element) {
+
+    element.textContent = count;
+
+  }
+
+}
+
+
+/* RENDER CART */
+
+function renderCart() {
+
+  const cart = getCart();
+
+  const container =
+    document.getElementById(
+      "cartContent"
+    );
+
+
+  if(!container) return;
+
+
+  /* EMPTY CART */
+
+  if(cart.length === 0) {
+
+    container.innerHTML = `
+
+      <div class="cart-products">
+
+        <div class="empty-cart">
+
+          <div class="empty-cart-icon">
+            🛒
+          </div>
+
+          <h2>
+            Your Cart Is Empty
+          </h2>
+
+          <p>
+            Apni pasand ki fragrance
+            cart mein add karein.
+          </p>
+
+          <a href="index.html#shop">
+            Shop Now
+          </a>
+
+        </div>
+
+      </div>
+
+    `;
+
+    updateCartCount();
+
+    return;
+
+  }
+
+
+  let subtotal = 0;
+
+
+  let productsHTML = "";
+
+
+  cart.forEach(function(item, index) {
+
+    const quantity =
+      Number(item.quantity) || 1;
+
+    const price =
+      Number(item.price) || 0;
+
+    const itemTotal =
+      price * quantity;
+
+
+    subtotal += itemTotal;
+
+
+    productsHTML += `
+
+      <div class="cart-item">
+
+        <div class="cart-item-image">
+
+          <img
+            src="${item.image || ''}"
+            alt="${item.name}"
+            onerror="this.style.display='none'"
+          >
+
+        </div>
+
+
+        <div class="cart-item-info">
+
+          <h3>
+            ${item.name}
+          </h3>
+
+          <p>
+            ₹${price}
+          </p>
+
+
+          <div class="quantity-box">
+
+            <button
+              onclick="changeQuantity(
+                ${index},
+                -1
+              )"
+            >
+              −
+            </button>
+
+            <span>
+              ${quantity}
+            </span>
+
+            <button
+              onclick="changeQuantity(
+                ${index},
+                1
+              )"
+            >
+              +
+            </button>
+
+          </div>
+
+
+          <button
+            class="remove-button"
+            onclick="removeItem(${index})"
+          >
+            Remove
+          </button>
+
+        </div>
+
+
+        <div class="cart-item-action">
+
+          <strong>
+            ₹${itemTotal}
+          </strong>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+
+  const totalItems =
+    cart.reduce(function(total, item) {
+
+      return total +
+        (Number(item.quantity) || 1);
+
+    }, 0);
+
+
+  container.innerHTML = `
+
+    <div class="cart-products">
+
+      ${productsHTML}
+
+    </div>
+
+
+    <aside class="cart-summary">
+
+      <h2>
+        Order Summary
+      </h2>
+
+
+      <div class="summary-row">
+
+        <span>
+          Items
+        </span>
+
+        <span>
+          ${totalItems}
+        </span>
+
+      </div>
+
+
+      <div class="summary-row">
+
+        <span>
+          Subtotal
+        </span>
+
+        <span>
+          ₹${subtotal}
+        </span>
+
+      </div>
+
+
+      <div class="summary-row">
+
+        <span>
+          Delivery
+        </span>
+
+        <span>
+          As applicable
+        </span>
+
+      </div>
+
+
+      <div class="summary-total">
+
+        <span>
+          Total
+        </span>
+
+        <span>
+          ₹${subtotal}
+        </span>
+
+      </div>
+
+
+      <button
+        class="order-button"
+        onclick="proceedToOrder()"
+      >
+        Proceed to Order →
+      </button>
+
+
+      <a
+        href="index.html#shop"
+        class="continue-shopping"
+      >
+        ← Continue Shopping
+      </a>
+
+    </aside>
+
+  `;
+
+
+  updateCartCount();
+
+}
+
+
+/* CHANGE QUANTITY */
+
+function changeQuantity(
+  index,
+  change
+) {
+
+  const cart = getCart();
+
+  if(!cart[index]) return;
+
+
+  let quantity =
+    Number(cart[index].quantity) || 1;
+
+
+  quantity += change;
+
+
+  if(quantity <= 0) {
+
+    cart.splice(index, 1);
+
+  } else {
+
+    cart[index].quantity = quantity;
+
+  }
+
+
+  saveCart(cart);
+
+  renderCart();
+
+}
+
+
+/* REMOVE ITEM */
+
+function removeItem(index) {
+
+  const cart = getCart();
+
+  if(!cart[index]) return;
+
+
+  cart.splice(index, 1);
+
+  saveCart(cart);
+
+  renderCart();
+
+}
+
+
+/* PROCEED TO ORDER */
+
+function proceedToOrder() {
+
+  const cart = getCart();
+
+
+  if(cart.length === 0) {
+
+    alert(
+      "Cart mein koi product nahi hai."
+    );
+
+    return;
+
+  }
+
+
+  window.location.href =
+    "order.html";
+
+}
+
+
+/* START */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+    renderCart();
+
+  }
+);
+
+</script>
+
 
 </body>
-
 </html>
