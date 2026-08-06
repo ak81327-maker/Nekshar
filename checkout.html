@@ -1,1 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout - Nekshar Agarbatti</title>
 
+<link rel="stylesheet" href="style.css">
+
+<style>
+.payment-box{
+background:#fff;
+padding:15px;
+border-radius:12px;
+margin:15px 0;
+border:1px solid #ddd;
+}
+
+.payment-option{
+margin:10px 0;
+font-size:16px;
+}
+
+#upiSection{
+display:none;
+margin-top:15px;
+padding:15px;
+background:#faf7f2;
+border-radius:10px;
+}
+
+#upiSection input{
+width:100%;
+padding:12px;
+margin-top:10px;
+}
+
+.upi-btn{
+display:inline-block;
+background:#c62828;
+color:#fff;
+padding:12px 20px;
+border-radius:8px;
+text-decoration:none;
+margin-top:12px;
+font-weight:bold;
+}
+
+button{
+width:100%;
+padding:15px;
+background:#c62828;
+color:#fff;
+border:none;
+border-radius:8px;
+font-size:18px;
+cursor:pointer;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+<h1>Nekshar Agarbatti</h1>
+</header>
+
+<section class="products-section">
+
+<h2>Checkout</h2>
+
+<form id="checkoutForm">
+
+<input
+type="text"
+id="name"
+placeholder="Full Name"
+required>
+
+<br><br>
+
+<input
+type="tel"
+id="mobile"
+placeholder="Mobile Number"
+required>
+
+<br><br>
+
+<textarea
+id="address"
+placeholder="Delivery Address"
+rows="5"
+required></textarea>
+
+<div class="payment-box">
+
+<h3>Select Payment Method</h3>
+
+<label class="payment-option">
+<input
+type="radio"
+name="payment"
+value="COD"
+checked>
+Cash on Delivery (COD)
+</label>
+
+<br>
+
+<label class="payment-option">
+<input
+type="radio"
+name="payment"
+value="UPI">
+UPI Payment
+</label>
+
+<div id="upiSection">
+
+<p>
+<b>UPI ID:</b><br>
+8287548936@ibl
+</p>
+
+<a
+class="upi-btn"
+href="upi://pay?pa=8287548936@ibl&pn=Nekshar%20Agarbatti">
+Pay Now
+</a>
+
+<input
+type="text"
+id="utr"
+placeholder="Enter UTR / Transaction ID">
+
+</div>
+
+</div>
+
+<button type="submit">
+Place Order
+</button>
+
+</form>
+
+</section>
+
+<script>
+const radios=document.querySelectorAll("input[name='payment']");
+const upi=document.getElementById("upiSection");
+
+radios.forEach(r=>{
+r.addEventListener("change",()=>{
+if(r.value==="UPI" && r.checked){
+upi.style.display="block";
+}else{
+upi.style.display="none";
+}
+});
+});
+
+document.getElementById("checkoutForm").addEventListener("submit",function(e){
+
+const pay=document.querySelector("input[name='payment']:checked").value;
+
+if(pay==="UPI"){
+
+const utr=document.getElementById("utr").value.trim();
+
+if(utr===""){
+alert("Please enter UTR / Transaction ID");
+e.preventDefault();
+return;
+}
+
+}
+
+alert("Order Placed Successfully!");
+
+});
+</script>
+
+</body>
+</html>
