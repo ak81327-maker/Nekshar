@@ -31,7 +31,7 @@ const message=
 ${payment==="UPI" ? "🧾 UTR: "+utr : ""}`;
 
 window.open(
-`https://wa.me/91YOURNUMBER?text=${encodeURIComponent(message)}`,
+`https://wa.me/918287548936?text=${encodeURIComponent(message)}`,
 "_blank"
 );
 
