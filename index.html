@@ -1,1 +1,79 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>अगरबत्ती कलेक्शन - ऑनलाइन स्टोर</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-amber-50 font-sans text-gray-800">
+
+    <!-- Header / Navigation -->
+    <header class="bg-amber-900 text-white p-4 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-wide">गृह शांति धूप & अगरबत्ती</h1>
+            <div class="relative">
+                <button class="bg-amber-700 px-4 py-2 rounded-lg hover:bg-amber-600 transition flex items-center gap-2">
+                    🛒 कार्ट (<span id="cart-count">0</span>)
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner Header -->
+    <section class="bg-amber-100 py-10 text-center border-b border-amber-200">
+        <h2 class="text-3xl font-bold text-amber-950">नेचुरल एवं प्राकृतिक अगरबत्ती</h2>
+        <p class="text-amber-800 mt-2 text-sm sm:text-base">शुद्धता और सुगंध से भरपूर आपके पूजा घर के लिए श्रेष्ठ विकल्प</p>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Products Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="product-grid">
+            <!-- JavaScript द्वारा प्रोडक्ट कार्ड्स लोड होंगे -->
+        </div>
+    </main>
+
+    <script>
+        // प्रोडक्ट डेटा (आप इसे अपने हिसाब से अपडेट कर सकते हैं)
+        const products = [
+            { id: 1, name: "प्रीमियम चंदन अगरबत्ती", price: 150, image: "https://via.placeholder.com/300x200?text=Chandan+Agarbatti" },
+            { id: 2, name: "प्राकृतिक गुलाब अगरबत्ती", price: 120, image: "https://via.placeholder.com/300x200?text=Rose+Agarbatti" },
+            { id: 3, name: "शुद्ध गूगल धूप बत्ती", price: 200, image: "https://via.placeholder.com/300x200?text=Guggul+Dhoop" },
+            { id: 4, name: "सुगंधित मोगरा अगरबत्ती", price: 130, image: "https://via.placeholder.com/300x200?text=Mogra+Agarbatti" }
+        ];
+
+        let cartCount = 0;
+
+        // प्रोडक्ट कार्ड्स को रेंडर करने का फ़ंक्शन
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = products.map(product => `
+                <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition duration-300 border border-amber-100 overflow-hidden flex flex-col justify-between">
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
+                    <div class="p-4 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">${product.name}</h3>
+                            <p class="text-amber-800 font-bold text-xl mt-2">₹${product.price}</p>
+                        </div>
+                        <button onclick="addToCart()" class="mt-4 w-full bg-amber-800 text-white py-2 rounded-lg hover:bg-amber-900 transition font-medium text-sm">
+                            कार्ट में जोड़ें
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // कार्ट काउंटर फ़ंक्शन
+        function addToCart() {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+        }
+
+        // पेज लोड होने पर प्रोडक्ट्स दिखाएं
+        renderProducts();
+    </script>
+</body>
+</html>
 
