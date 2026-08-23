@@ -1,1 +1,161 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Order Successful | Nekshar Agarbatti</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="top-bar">
+    🚚 Shipping All Over India
+  </div>
+
+
+  <header class="header">
+
+    <div class="logo-area">
+
+      <a href="index.html">
+
+        <img
+          src="images/nekshar-logo.jpg"
+          alt="Nekshar Agarbatti Logo"
+          class="logo"
+        >
+
+      </a>
+
+      <div class="brand-name">
+        NEKSHAR AGARBATTI
+      </div>
+
+      <div class="tagline">
+        ✦ भक्ति की पहचान ✦
+      </div>
+
+    </div>
+
+
+    <nav class="nav">
+
+      <a href="index.html">
+        HOME
+      </a>
+
+      <a href="shop.html">
+        SHOP NOW
+      </a>
+
+      <a href="cart.html">
+        🛒 CART
+        <span id="cart-count">0</span>
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <main class="success-page">
+
+    <div class="success-card">
+
+      <div class="success-icon">
+        ✓
+      </div>
+
+
+      <h1>
+        Thank You!
+      </h1>
+
+
+      <h2>
+        आपका Order तैयार है
+      </h2>
+
+
+      <p>
+        आपका order WhatsApp पर भेजने के लिए
+        तैयार किया गया है।
+      </p>
+
+
+      <p class="success-note">
+        कृपया WhatsApp पर order details देखकर
+        message भेजना सुनिश्चित करें।
+      </p>
+
+
+      <a
+        href="shop.html"
+        class="shop-button"
+      >
+        CONTINUE SHOPPING
+      </a>
+
+
+      <a
+        href="index.html"
+        class="home-link"
+      >
+        ← Back to Home
+      </a>
+
+    </div>
+
+  </main>
+
+
+  <footer class="footer">
+
+    <div class="footer-brand">
+      NEKSHAR AGARBATTI
+    </div>
+
+    <p>
+      ✦ भक्ति की पहचान ✦
+    </p>
+
+    <p>
+      Premium Fragrance • Premium Quality
+    </p>
+
+    <p class="copyright">
+      © 2026 Nekshar Agarbatti. All Rights Reserved.
+    </p>
+
+  </footer>
+
+
+  <script>
+
+    const cart =
+      JSON.parse(
+        localStorage.getItem(
+          "neksharCart"
+        )
+      ) || [];
+
+
+    const cartCount =
+      cart.reduce(
+        (sum, item) =>
+          sum + item.quantity,
+        0
+      );
+
+
+    document.getElementById(
+      "cart-count"
+    ).textContent = cartCount;
+
+  </script>
+
+</body>
+</html>
