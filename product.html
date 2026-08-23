@@ -1,1 +1,368 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Product | Nekshar Agarbatti</title>
+
+  <meta name="description"
+        content="Nekshar Premium Agarbatti and Dhoop Cone">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="top-bar">
+    🚚 Shipping All Over India
+  </div>
+
+
+  <header class="header">
+
+    <div class="logo-area">
+
+      <a href="index.html">
+
+        <img
+          src="images/nekshar-logo.jpg"
+          alt="Nekshar Agarbatti Logo"
+          class="logo"
+        >
+
+      </a>
+
+      <div class="brand-name">
+        NEKSHAR AGARBATTI
+      </div>
+
+      <div class="tagline">
+        ✦ भक्ति की पहचान ✦
+      </div>
+
+    </div>
+
+
+    <nav class="nav">
+
+      <a href="index.html">
+        HOME
+      </a>
+
+      <a href="shop.html">
+        SHOP NOW
+      </a>
+
+      <a href="cart.html">
+        🛒 CART
+        <span id="cart-count">0</span>
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <main class="product-page">
+
+    <div id="product-detail">
+    </div>
+
+  </main>
+
+
+  <footer class="footer">
+
+    <div class="footer-brand">
+      NEKSHAR AGARBATTI
+    </div>
+
+    <p>
+      ✦ भक्ति की पहचान ✦
+    </p>
+
+    <p>
+      Premium Fragrance • Premium Quality
+    </p>
+
+    <p class="copyright">
+      © 2026 Nekshar Agarbatti. All Rights Reserved.
+    </p>
+
+  </footer>
+
+
+  <script src="js/products.js"></script>
+
+
+  <script>
+
+    const params =
+      new URLSearchParams(window.location.search);
+
+    const productId =
+      params.get("id");
+
+    const product =
+      products.find(
+        item => item.id === productId
+      );
+
+
+    const detail =
+      document.getElementById("product-detail");
+
+
+    if (!product) {
+
+      detail.innerHTML = `
+
+        <div class="product-not-found">
+
+          <h1>Product Not Found</h1>
+
+          <p>
+            Sorry, this product is not available.
+          </p>
+
+          <a
+            href="shop.html"
+            class="view-button"
+          >
+            BACK TO SHOP
+          </a>
+
+        </div>
+
+      `;
+
+    } else {
+
+      document.title =
+        product.name + " | Nekshar Agarbatti";
+
+
+      detail.innerHTML = `
+
+        <div class="single-product">
+
+
+          <div class="single-product-image">
+
+            <img
+              src="${product.image}"
+              alt="${product.name}"
+            >
+
+          </div>
+
+
+          <div class="single-product-info">
+
+            <span class="product-category">
+              ${product.categoryName}
+            </span>
+
+
+            <h1>
+              ${product.name}
+            </h1>
+
+
+            <div class="single-price">
+              ₹${product.price}
+            </div>
+
+
+            <p class="single-description">
+              ${product.description}
+            </p>
+
+
+            <div class="product-quality">
+
+              <div>
+                ✓ Premium Quality
+              </div>
+
+              <div>
+                ✓ Premium Fragrance
+              </div>
+
+              <div>
+                ✓ Shipping All Over India
+              </div>
+
+            </div>
+
+
+            <div class="quantity-box">
+
+              <button
+                id="minus"
+                type="button">
+                −
+              </button>
+
+              <span id="quantity">
+                1
+              </span>
+
+              <button
+                id="plus"
+                type="button">
+                +
+              </button>
+
+            </div>
+
+
+            <button
+              id="add-to-cart"
+              class="add-cart-button"
+              type="button"
+            >
+              🛒 ADD TO CART
+            </button>
+
+
+            <a
+              href="cart.html"
+              class="buy-now-button"
+            >
+              VIEW CART
+            </a>
+
+
+          </div>
+
+        </div>
+
+      `;
+
+
+      let quantity = 1;
+
+      const quantityElement =
+        document.getElementById("quantity");
+
+
+      document.getElementById("plus")
+        .addEventListener("click", () => {
+
+          quantity++;
+
+          quantityElement.textContent =
+            quantity;
+
+        });
+
+
+      document.getElementById("minus")
+        .addEventListener("click", () => {
+
+          if (quantity > 1) {
+
+            quantity--;
+
+            quantityElement.textContent =
+              quantity;
+
+          }
+
+        });
+
+
+      document.getElementById("add-to-cart")
+        .addEventListener("click", () => {
+
+          let cart =
+            JSON.parse(
+              localStorage.getItem("neksharCart")
+            ) || [];
+
+
+          const existing =
+            cart.find(
+              item => item.id === product.id
+            );
+
+
+          if (existing) {
+
+            existing.quantity += quantity;
+
+          } else {
+
+            cart.push({
+
+              id: product.id,
+
+              name: product.name,
+
+              price: product.price,
+
+              image: product.image,
+
+              quantity: quantity
+
+            });
+
+          }
+
+
+          localStorage.setItem(
+            "neksharCart",
+            JSON.stringify(cart)
+          );
+
+
+          updateCartCount();
+
+          alert(
+            product.name +
+            " cart me add ho gaya."
+          );
+
+        });
+
+    }
+
+
+    function updateCartCount() {
+
+      const cart =
+        JSON.parse(
+          localStorage.getItem("neksharCart")
+        ) || [];
+
+
+      const total =
+        cart.reduce(
+          (sum, item) =>
+            sum + item.quantity,
+          0
+        );
+
+
+      const count =
+        document.getElementById("cart-count");
+
+
+      if (count) {
+
+        count.textContent =
+          total;
+
+      }
+
+    }
+
+
+    updateCartCount();
+
+  </script>
+
+</body>
+</html>
