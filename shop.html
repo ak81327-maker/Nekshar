@@ -1,1 +1,221 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Shop | Nekshar Agarbatti</title>
+
+  <meta name="description"
+        content="Shop premium Nekshar Chandan, Mogra and Rose Agarbatti and Dhoop Cone.">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="top-bar">
+    🚚 Shipping All Over India
+  </div>
+
+  <header class="header">
+
+    <div class="logo-area">
+
+      <a href="index.html">
+        <img src="images/nekshar-logo.jpg"
+             alt="Nekshar Agarbatti Logo"
+             class="logo">
+      </a>
+
+      <div class="brand-name">
+        NEKSHAR AGARBATTI
+      </div>
+
+      <div class="tagline">
+        ✦ भक्ति की पहचान ✦
+      </div>
+
+    </div>
+
+    <nav class="nav">
+
+      <a href="index.html">HOME</a>
+
+      <a href="shop.html">SHOP NOW</a>
+
+      <a href="cart.html">
+        🛒 CART
+        <span id="cart-count">0</span>
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <main class="shop-page">
+
+    <section class="shop-heading">
+
+      <p class="hero-small">
+        NEKSHAR COLLECTION
+      </p>
+
+      <h1>Our Products</h1>
+
+      <p>
+        Premium fragrance for your devotional moments.
+      </p>
+
+    </section>
+
+
+    <!-- CATEGORY FILTER -->
+
+    <div class="shop-filters">
+
+      <button class="filter-btn active"
+              data-category="all">
+        ALL
+      </button>
+
+      <button class="filter-btn"
+              data-category="agarbatti">
+        AGARBATTI
+      </button>
+
+      <button class="filter-btn"
+              data-category="dhoop">
+        DHOOP CONE
+      </button>
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+
+    <section class="shop-products">
+
+      <div id="shop-product-grid"
+           class="product-grid">
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer class="footer">
+
+    <div class="footer-brand">
+      NEKSHAR AGARBATTI
+    </div>
+
+    <p>✦ भक्ति की पहचान ✦</p>
+
+    <p>
+      Premium Fragrance • Premium Quality
+    </p>
+
+    <p class="copyright">
+      © 2026 Nekshar Agarbatti. All Rights Reserved.
+    </p>
+
+  </footer>
+
+
+  <script src="js/products.js"></script>
+
+  <script>
+
+    const productGrid =
+      document.getElementById("shop-product-grid");
+
+    const filterButtons =
+      document.querySelectorAll(".filter-btn");
+
+
+    function showProducts(category = "all") {
+
+      productGrid.innerHTML = "";
+
+      const filteredProducts =
+        category === "all"
+          ? products
+          : products.filter(
+              product => product.category === category
+            );
+
+
+      filteredProducts.forEach(product => {
+
+        const card = document.createElement("div");
+
+        card.className = "product-card";
+
+        card.innerHTML = `
+
+          <img
+            src="${product.image}"
+            alt="${product.name}"
+          >
+
+          <div class="product-info">
+
+            <span class="product-category">
+              ${product.categoryName}
+            </span>
+
+            <h3>
+              ${product.name}
+            </h3>
+
+            <div class="price">
+              ₹${product.price}
+            </div>
+
+            <a
+              href="product.html?id=${product.id}"
+              class="view-button"
+            >
+              VIEW PRODUCT
+            </a>
+
+          </div>
+
+        `;
+
+        productGrid.appendChild(card);
+
+      });
+
+    }
+
+
+    filterButtons.forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        filterButtons.forEach(btn =>
+          btn.classList.remove("active")
+        );
+
+        button.classList.add("active");
+
+        showProducts(
+          button.dataset.category
+        );
+
+      });
+
+    });
+
+
+    showProducts();
+
+
+  </script>
+
+</body>
+</html>
