@@ -63,13 +63,12 @@ textarea {
   text-decoration: none;
 }
 
-.logo {
-  width: 72px;
-  height: 72px;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto 3px;
-  border-radius: 50%;
+.logo img {
+    width: 130px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
 }
 
 .brand-name {
