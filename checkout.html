@@ -1,1 +1,572 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Checkout | Nekshar Agarbatti</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="top-bar">
+    🚚 Shipping All Over India
+  </div>
+
+  <header class="header">
+
+    <div class="logo-area">
+
+      <a href="index.html">
+        <img
+          src="images/nekshar-logo.jpg"
+          alt="Nekshar Agarbatti Logo"
+          class="logo"
+        >
+      </a>
+
+      <div class="brand-name">
+        NEKSHAR AGARBATTI
+      </div>
+
+      <div class="tagline">
+        ✦ भक्ति की पहचान ✦
+      </div>
+
+    </div>
+
+    <nav class="nav">
+
+      <a href="index.html">HOME</a>
+
+      <a href="shop.html">SHOP NOW</a>
+
+      <a href="cart.html">
+        🛒 CART
+        <span id="cart-count">0</span>
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <main class="checkout-page">
+
+    <section class="checkout-heading">
+
+      <h1>Checkout</h1>
+
+      <p>
+        Enter your delivery details and select payment method.
+      </p>
+
+    </section>
+
+
+    <div class="checkout-layout">
+
+
+      <!-- CUSTOMER DETAILS -->
+
+      <form
+        id="checkout-form"
+        class="checkout-form"
+      >
+
+        <h2>Delivery Details</h2>
+
+
+        <label for="name">
+          Full Name
+        </label>
+
+        <input
+          type="text"
+          id="name"
+          required
+          placeholder="Enter your full name"
+        >
+
+
+        <label for="mobile">
+          Mobile Number
+        </label>
+
+        <input
+          type="tel"
+          id="mobile"
+          required
+          inputmode="numeric"
+          pattern="[0-9]{10}"
+          maxlength="10"
+          placeholder="10 digit mobile number"
+        >
+
+
+        <label for="address">
+          Complete Address
+        </label>
+
+        <textarea
+          id="address"
+          required
+          rows="4"
+          placeholder="House no., street, area"
+        ></textarea>
+
+
+        <div class="address-row">
+
+          <div>
+
+            <label for="city">
+              City
+            </label>
+
+            <input
+              type="text"
+              id="city"
+              required
+              placeholder="City"
+            >
+
+          </div>
+
+
+          <div>
+
+            <label for="pincode">
+              PIN Code
+            </label>
+
+            <input
+              type="text"
+              id="pincode"
+              required
+              inputmode="numeric"
+              pattern="[0-9]{6}"
+              maxlength="6"
+              placeholder="6 digit PIN"
+            >
+
+          </div>
+
+        </div>
+
+
+        <label for="state">
+          State
+        </label>
+
+        <input
+          type="text"
+          id="state"
+          required
+          placeholder="State"
+        >
+
+
+        <!-- PAYMENT METHOD -->
+
+        <div class="payment-section">
+
+          <h2>
+            Payment Method
+          </h2>
+
+
+          <label class="payment-option">
+
+            <input
+              type="radio"
+              name="payment"
+              value="UPI"
+              checked
+            >
+
+            <span>
+              💳
+            </span>
+
+            <div>
+
+              <strong>
+                Pay Online (UPI)
+              </strong>
+
+              <small>
+                UPI payment
+              </small>
+
+            </div>
+
+          </label>
+
+
+          <label class="payment-option">
+
+            <input
+              type="radio"
+              name="payment"
+              value="Cash on Delivery"
+            >
+
+            <span>
+              💵
+            </span>
+
+            <div>
+
+              <strong>
+                Cash on Delivery
+              </strong>
+
+              <small>
+                Pay when your order is delivered
+              </small>
+
+            </div>
+
+          </label>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="place-order-button"
+        >
+          PLACE ORDER ON WHATSAPP
+        </button>
+
+      </form>
+
+
+      <!-- ORDER SUMMARY -->
+
+      <div
+        id="checkout-summary"
+        class="checkout-summary"
+      >
+      </div>
+
+
+    </div>
+
+  </main>
+
+
+  <footer class="footer">
+
+    <div class="footer-brand">
+      NEKSHAR AGARBATTI
+    </div>
+
+    <p>
+      ✦ भक्ति की पहचान ✦
+    </p>
+
+    <p>
+      Premium Fragrance • Premium Quality
+    </p>
+
+    <p class="copyright">
+      © 2026 Nekshar Agarbatti. All Rights Reserved.
+    </p>
+
+  </footer>
+
+
+  <script>
+
+    const CART_KEY = "neksharCart";
+
+
+    function getCart() {
+
+      return JSON.parse(
+        localStorage.getItem(CART_KEY)
+      ) || [];
+
+    }
+
+
+    function updateCartCount() {
+
+      const cart =
+        getCart();
+
+      const total =
+        cart.reduce(
+          (sum, item) =>
+            sum + item.quantity,
+          0
+        );
+
+      document.getElementById(
+        "cart-count"
+      ).textContent = total;
+
+    }
+
+
+    function renderCheckoutSummary() {
+
+      const cart =
+        getCart();
+
+      const summary =
+        document.getElementById(
+          "checkout-summary"
+        );
+
+
+      if (cart.length === 0) {
+
+        summary.innerHTML = `
+
+          <h2>Your Cart is Empty</h2>
+
+          <p>
+            Please add products before checkout.
+          </p>
+
+          <a
+            href="shop.html"
+            class="view-button"
+          >
+            GO TO SHOP
+          </a>
+
+        `;
+
+        return;
+
+      }
+
+
+      let total = 0;
+
+      let itemsHTML = "";
+
+
+      cart.forEach(item => {
+
+        const itemTotal =
+          item.price * item.quantity;
+
+        total += itemTotal;
+
+
+        itemsHTML += `
+
+          <div class="checkout-item">
+
+            <span>
+              ${item.name}
+              × ${item.quantity}
+            </span>
+
+            <strong>
+              ₹${itemTotal}
+            </strong>
+
+          </div>
+
+        `;
+
+      });
+
+
+      summary.innerHTML = `
+
+        <h2>
+          Order Summary
+        </h2>
+
+        ${itemsHTML}
+
+        <div class="checkout-total">
+
+          <span>
+            Total
+          </span>
+
+          <strong>
+            ₹${total}
+          </strong>
+
+        </div>
+
+      `;
+
+    }
+
+
+    document.getElementById(
+      "checkout-form"
+    ).addEventListener(
+      "submit",
+      function(event) {
+
+        event.preventDefault();
+
+
+        const cart =
+          getCart();
+
+
+        if (cart.length === 0) {
+
+          alert(
+            "Your cart is empty."
+          );
+
+          window.location.href =
+            "shop.html";
+
+          return;
+
+        }
+
+
+        const name =
+          document.getElementById(
+            "name"
+          ).value.trim();
+
+
+        const mobile =
+          document.getElementById(
+            "mobile"
+          ).value.trim();
+
+
+        const address =
+          document.getElementById(
+            "address"
+          ).value.trim();
+
+
+        const city =
+          document.getElementById(
+            "city"
+          ).value.trim();
+
+
+        const pincode =
+          document.getElementById(
+            "pincode"
+          ).value.trim();
+
+
+        const state =
+          document.getElementById(
+            "state"
+          ).value.trim();
+
+
+        const payment =
+          document.querySelector(
+            'input[name="payment"]:checked'
+          ).value;
+
+
+        let total = 0;
+
+        let orderItems = "";
+
+
+        cart.forEach(item => {
+
+          const itemTotal =
+            item.price * item.quantity;
+
+          total += itemTotal;
+
+
+          orderItems +=
+            `• ${item.name} × ${item.quantity} = ₹${itemTotal}\n`;
+
+        });
+
+
+        const message =
+
+`🙏 *NEW ORDER - NEKSHAR AGARBATTI*
+
+📦 *ORDER DETAILS*
+
+${orderItems}
+
+💰 *TOTAL: ₹${total}*
+
+💳 *PAYMENT METHOD*
+${payment}
+
+👤 *CUSTOMER DETAILS*
+
+Name: ${name}
+
+Mobile: ${mobile}
+
+Address: ${address}
+
+City: ${city}
+
+PIN: ${pincode}
+
+State: ${state}
+
+Thank you 🙏`;
+
+
+        /*
+        ====================================
+        WHATSAPP NUMBER
+        ====================================
+
+        यहां अपना WhatsApp number डालें।
+
+        Example:
+        919876543210
+
+        + sign और spaces नहीं लगाने हैं.
+        */
+
+
+        const whatsappNumber =
+          "918287548936";
+
+
+        const whatsappURL =
+          "https://wa.me/" +
+          whatsappNumber +
+          "?text=" +
+          encodeURIComponent(message);
+
+
+        /*
+        Order को WhatsApp में खोलें
+        */
+
+        window.open(
+          whatsappURL,
+          "_blank"
+        );
+
+      }
+    );
+
+
+    updateCartCount();
+
+    renderCheckoutSummary();
+
+  </script>
+
+</body>
+</html>
