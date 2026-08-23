@@ -1,1 +1,414 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Cart | Nekshar Agarbatti</title>
+
+  <meta name="description"
+        content="Your Nekshar Agarbatti shopping cart.">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="top-bar">
+    🚚 Shipping All Over India
+  </div>
+
+
+  <header class="header">
+
+    <div class="logo-area">
+
+      <a href="index.html">
+
+        <img
+          src="images/nekshar-logo.jpg"
+          alt="Nekshar Agarbatti Logo"
+          class="logo"
+        >
+
+      </a>
+
+      <div class="brand-name">
+        NEKSHAR AGARBATTI
+      </div>
+
+      <div class="tagline">
+        ✦ भक्ति की पहचान ✦
+      </div>
+
+    </div>
+
+
+    <nav class="nav">
+
+      <a href="index.html">
+        HOME
+      </a>
+
+      <a href="shop.html">
+        SHOP NOW
+      </a>
+
+      <a href="cart.html">
+        🛒 CART
+        <span id="cart-count">0</span>
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <main class="cart-page">
+
+    <section class="cart-heading">
+
+      <h1>Your Shopping Cart</h1>
+
+      <p>
+        Review your products before checkout.
+      </p>
+
+    </section>
+
+
+    <div id="cart-container">
+    </div>
+
+  </main>
+
+
+  <footer class="footer">
+
+    <div class="footer-brand">
+      NEKSHAR AGARBATTI
+    </div>
+
+    <p>
+      ✦ भक्ति की पहचान ✦
+    </p>
+
+    <p>
+      Premium Fragrance • Premium Quality
+    </p>
+
+    <p class="copyright">
+      © 2026 Nekshar Agarbatti. All Rights Reserved.
+    </p>
+
+  </footer>
+
+
+  <script>
+
+    const CART_KEY = "neksharCart";
+
+
+    function getCart() {
+
+      return JSON.parse(
+        localStorage.getItem(CART_KEY)
+      ) || [];
+
+    }
+
+
+    function saveCart(cart) {
+
+      localStorage.setItem(
+        CART_KEY,
+        JSON.stringify(cart)
+      );
+
+    }
+
+
+    function updateCartCount(cart) {
+
+      const count =
+        cart.reduce(
+          (sum, item) =>
+            sum + item.quantity,
+          0
+        );
+
+
+      const cartCount =
+        document.getElementById("cart-count");
+
+
+      if (cartCount) {
+
+        cartCount.textContent =
+          count;
+
+      }
+
+    }
+
+
+    function renderCart() {
+
+      const cart =
+        getCart();
+
+      const container =
+        document.getElementById(
+          "cart-container"
+        );
+
+
+      updateCartCount(cart);
+
+
+      if (cart.length === 0) {
+
+        container.innerHTML = `
+
+          <div class="empty-cart">
+
+            <div class="empty-cart-icon">
+              🛒
+            </div>
+
+            <h2>
+              Your Cart is Empty
+            </h2>
+
+            <p>
+              अभी आपके cart में कोई product नहीं है।
+            </p>
+
+            <a
+              href="shop.html"
+              class="shop-button"
+            >
+              CONTINUE SHOPPING
+            </a>
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      let subtotal = 0;
+
+
+      let itemsHTML = "";
+
+
+      cart.forEach((item, index) => {
+
+        const itemTotal =
+          item.price * item.quantity;
+
+
+        subtotal += itemTotal;
+
+
+        itemsHTML += `
+
+          <div class="cart-item">
+
+
+            <div class="cart-product">
+
+              <img
+                src="${item.image}"
+                alt="${item.name}"
+              >
+
+              <div>
+
+                <h3>
+                  ${item.name}
+                </h3>
+
+                <p>
+                  ₹${item.price} each
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="cart-quantity">
+
+              <button
+                onclick="changeQuantity(${index}, -1)"
+              >
+                −
+              </button>
+
+              <span>
+                ${item.quantity}
+              </span>
+
+              <button
+                onclick="changeQuantity(${index}, 1)"
+              >
+                +
+              </button>
+
+            </div>
+
+
+            <div class="cart-item-total">
+              ₹${itemTotal}
+            </div>
+
+
+            <button
+              class="remove-item"
+              onclick="removeItem(${index})"
+            >
+              ✕
+            </button>
+
+
+          </div>
+
+        `;
+
+      });
+
+
+      container.innerHTML = `
+
+        <div class="cart-layout">
+
+
+          <div class="cart-items">
+
+            ${itemsHTML}
+
+          </div>
+
+
+          <div class="cart-summary">
+
+            <h2>
+              Order Summary
+            </h2>
+
+
+            <div class="summary-row">
+
+              <span>
+                Subtotal
+              </span>
+
+              <strong>
+                ₹${subtotal}
+              </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+              <span>
+                Shipping
+              </span>
+
+              <strong>
+                Calculated at checkout
+              </strong>
+
+            </div>
+
+
+            <div class="summary-total">
+
+              <span>
+                Total
+              </span>
+
+              <strong>
+                ₹${subtotal}
+              </strong>
+
+            </div>
+
+
+            <a
+              href="checkout.html"
+              class="checkout-button"
+            >
+              PROCEED TO CHECKOUT
+            </a>
+
+
+            <a
+              href="shop.html"
+              class="continue-shopping"
+            >
+              ← Continue Shopping
+            </a>
+
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+
+    function changeQuantity(index, change) {
+
+      const cart =
+        getCart();
+
+
+      cart[index].quantity +=
+        change;
+
+
+      if (cart[index].quantity <= 0) {
+
+        cart.splice(index, 1);
+
+      }
+
+
+      saveCart(cart);
+
+      renderCart();
+
+    }
+
+
+    function removeItem(index) {
+
+      const cart =
+        getCart();
+
+
+      cart.splice(index, 1);
+
+
+      saveCart(cart);
+
+      renderCart();
+
+    }
+
+
+    renderCart();
+
+  </script>
+
+</body>
+</html>
