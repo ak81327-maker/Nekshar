@@ -51,8 +51,9 @@ textarea {
   padding: 15px 5%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 25px;
+  position: relative;
 }
 
 .logo-area {
